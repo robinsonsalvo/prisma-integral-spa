@@ -1342,21 +1342,10 @@ async function sendAI(){
   msgs.appendChild(loading);
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`Eres el asistente virtual de PRISMA INTEGRAL SpA, empresa chilena con más de 15 años de experiencia en revestimientos y remodelaciones, ubicada en Providencia, Santiago. Tu nombre es "Prisma IA".
-
-Especialidades: instalación de pisos (porcelanato, cerámica, gres, madera, vinílico), revestimientos murales, baños completos, cocinas, remodelaciones integrales. Usamos nivelación láser y materiales premium.
-
-Contacto: Administración +56963029293 (Estrella Cornejo), Supervisión +56946163281 (Robinson Salvo), correo prismaintegral.contacto@gmail.com, dirección Antonio Bellet 193 Of 1210, Providencia.
-
-Responde SIEMPRE en español chileno, profesional pero cercano. Máximo 4 oraciones. Para precios indica que varían según proyecto y ofrecen cotizaciones sin costo. Siempre invita a contactar.`,
-        messages:[{role:'user',content:q}]
-      })
+    const res = await fetch('https://prisma-ia.prismaintegral-contacto.workers.dev', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: q })
     });
     const data = await res.json();
     loading.className='ai-loading';
